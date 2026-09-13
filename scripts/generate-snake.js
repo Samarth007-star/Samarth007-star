@@ -62,19 +62,15 @@ function generateGrid() {
 
       const intensity = random(seed++);
 
-      let level;
-
       if (intensity < 0.25) {
-        level = 1;
+        column.push(1);
       } else if (intensity < 0.50) {
-        level = 2;
+        column.push(2);
       } else if (intensity < 0.78) {
-        level = 3;
+        column.push(3);
       } else {
-        level = 4;
+        column.push(4);
       }
-
-      column.push(level);
     }
 
     grid.push(column);
@@ -91,31 +87,112 @@ function point(x, y) {
 }
 
 function generateSnakePath() {
-  const snakePath = [];
+  const path = [];
 
   for (let x = 0; x < WIDTH; x++) {
     if (x % 2 === 0) {
       for (let y = 0; y < HEIGHT; y++) {
-        snakePath.push({ x, y });
+        path.push({ x, y });
       }
     } else {
       for (let y = HEIGHT - 1; y >= 0; y--) {
-        snakePath.push({ x, y });
+        path.push({ x, y });
       }
     }
   }
 
-  return snakePath;
+  return path;
 }
 
-function pathToSvg(points) {
-  return points
-    .map((p, index) => {
-      const position = point(p.x, p.y);
+function getAnimationValues(snakePath, axis) {
+  return snakePath
+    .map(cell => point(cell.x, cell.y)[axis])
+    .join(";");
+}
 
-      return `${index === 0 ? "M" : "L"} ${position.x} ${position.y}`;
-    })
-    .join(" ");
+function getKeyTimes(length) {
+  return snakePathKeyTimes(length);
+}
+
+function snakePathKeyTimes(length) {
+  const values = [];
+
+  for (let i = 0; i < length; i++) {
+    values.push((i / (length - 1)).toFixed(6));
+  }
+
+  return values.join(";");
+}
+
+function createMovingSnake(snakePath) {
+  const cxValues = getAnimationValues(
+    snakePath,
+    "x"
+  );
+
+  const cyValues = getAnimationValues(
+    snakePath,
+    "y"
+  );
+
+  const keyTimes = getKeyTimes(
+    snakePath.length
+  );
+
+  let output = "";
+
+  const snakeLength = 9;
+
+  for (let i = snakeLength - 1; i >= 0; i--) {
+    const delay = -(i * 0.16);
+
+    const radius = i === 0 ? 6 : 4.5;
+
+    const opacity = Math.max(
+      0.25,
+      1 - i * 0.09
+    );
+
+    output += `
+      <circle
+        cx="${point(
+          snakePath[0].x,
+          snakePath[0].y
+        ).x}"
+        cy="${point(
+          snakePath[0].x,
+          snakePath[0].y
+        ).y}"
+        r="${radius}"
+        fill="${SNAKE_COLOR}"
+        opacity="${opacity}"
+      >
+
+        <animate
+          attributeName="cx"
+          values="${cxValues}"
+          keyTimes="${keyTimes}"
+          dur="${ANIMATION_DURATION}s"
+          begin="${delay}s"
+          repeatCount="indefinite"
+          calcMode="linear"
+        />
+
+        <animate
+          attributeName="cy"
+          values="${cyValues}"
+          keyTimes="${keyTimes}"
+          dur="${ANIMATION_DURATION}s"
+          begin="${delay}s"
+          repeatCount="indefinite"
+          calcMode="linear"
+        />
+
+      </circle>
+    `;
+  }
+
+  return output;
 }
 
 function createGridSvg(grid, snakePath) {
@@ -126,30 +203,27 @@ function createGridSvg(grid, snakePath) {
   const cellIndex = new Map();
 
   snakePath.forEach((cell, index) => {
-    cellIndex.set(`${cell.x}-${cell.y}`, index);
+    cellIndex.set(
+      `${cell.x}-${cell.y}`,
+      index
+    );
   });
 
   for (let x = 0; x < WIDTH; x++) {
     for (let y = 0; y < HEIGHT; y++) {
       const level = grid[x][y];
 
-      const px = PADDING_X + x * STEP_X;
-      const py = PADDING_Y + y * STEP_Y;
+      const px =
+        PADDING_X + x * STEP_X;
+
+      const py =
+        PADDING_Y + y * STEP_Y;
 
       const color = COLORS[level];
 
-      const index = cellIndex.get(`${x}-${y}`);
+      const index =
+        cellIndex.get(`${x}-${y}`);
 
-      const progress = index / pathLength;
-
-      /*
-       * Only light-green cells are eaten.
-       *
-       * Level 1 = dark green  → stays
-       * Level 2 = medium green → stays
-       * Level 3 = light green → eaten
-       * Level 4 = brightest green → eaten
-       */
       if (!EAT_LEVELS.has(level)) {
         output += `
           <rect
@@ -165,12 +239,14 @@ function createGridSvg(grid, snakePath) {
         continue;
       }
 
-      const eatStart = progress;
+      const eatStart =
+        index / pathLength;
 
-      const eatEnd = Math.min(
-        progress + 0.006,
-        0.999
-      );
+      const eatEnd =
+        Math.min(
+          eatStart + 0.008,
+          0.999
+        );
 
       output += `
         <rect
@@ -181,6 +257,7 @@ function createGridSvg(grid, snakePath) {
           rx="3"
           fill="${color}"
         >
+
           <animate
             attributeName="opacity"
             values="1;1;0;0;1"
@@ -194,6 +271,7 @@ function createGridSvg(grid, snakePath) {
             dur="${ANIMATION_DURATION}s"
             repeatCount="indefinite"
           />
+
         </rect>
       `;
     }
@@ -202,56 +280,23 @@ function createGridSvg(grid, snakePath) {
   return output;
 }
 
-function createSnakeSvg(snakePath) {
-  const svgPath = pathToSvg(snakePath);
+function generateSvg() {
+  const grid =
+    generateGrid();
 
-  let output = "";
+  const snakePath =
+    generateSnakePath();
 
-  const snakeLength = 10;
-
-  for (let i = snakeLength - 1; i >= 0; i--) {
-    const delay = -(i * 0.16);
-
-    const radius = i === 0 ? 6 : 4.5;
-
-    const opacity = Math.max(
-      0.25,
-      1 - i * 0.085
+  const gridSvg =
+    createGridSvg(
+      grid,
+      snakePath
     );
 
-    output += `
-      <circle
-        r="${radius}"
-        fill="${SNAKE_COLOR}"
-        opacity="${opacity}"
-      >
-        <animateMotion
-          dur="${ANIMATION_DURATION}s"
-          begin="${delay}s"
-          repeatCount="indefinite"
-          rotate="auto"
-          path="${svgPath}"
-        />
-      </circle>
-    `;
-  }
-
-  return output;
-}
-
-function generateSvg() {
-  const grid = generateGrid();
-
-  const snakePath = generateSnakePath();
-
-  const gridSvg = createGridSvg(
-    grid,
-    snakePath
-  );
-
-  const snakeSvg = createSnakeSvg(
-    snakePath
-  );
+  const snakeSvg =
+    createMovingSnake(
+      snakePath
+    );
 
   return `
 <svg
@@ -262,6 +307,7 @@ function generateSvg() {
   role="img"
   aria-label="Contribution Journey"
 >
+
   <rect
     width="100%"
     height="100%"
@@ -275,21 +321,27 @@ function generateSvg() {
   <g>
     ${snakeSvg}
   </g>
+
 </svg>
 `;
 }
 
 function main() {
-  const dist = path.join(
-    process.cwd(),
-    "dist"
+  const dist =
+    path.join(
+      process.cwd(),
+      "dist"
+    );
+
+  fs.mkdirSync(
+    dist,
+    {
+      recursive: true
+    }
   );
 
-  fs.mkdirSync(dist, {
-    recursive: true
-  });
-
-  const svg = generateSvg();
+  const svg =
+    generateSvg();
 
   fs.writeFileSync(
     path.join(
@@ -308,11 +360,15 @@ function main() {
   );
 
   console.log(
-    "Only light-green cells are eaten."
+    "Dark and medium green cells remain."
   );
 
   console.log(
-    "Dark-green cells remain visible."
+    "Light green cells are eaten."
+  );
+
+  console.log(
+    "Snake uses direct coordinate animation."
   );
 }
 
