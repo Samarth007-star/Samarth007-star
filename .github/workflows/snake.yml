@@ -3,30 +3,31 @@ name: Contribution Journey
 on:
   schedule:
     - cron: "0 0 * * *"
+
   workflow_dispatch:
+
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Generate contribution snake
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USERNAME: Samarth007-star
+      - name: Generate Contribution Journey
         run: node scripts/generate-snake.js
 
       - name: Publish animation
