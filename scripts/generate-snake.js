@@ -1,138 +1,84 @@
 const fs = require("fs");
 const path = require("path");
 
-const username = process.env.GITHUB_USERNAME;
-const token = process.env.GITHUB_TOKEN;
-
-const COLORS = {
-  0: "#161B22",
-  1: "#0E4429",
-  2: "#006D32",
-  3: "#26A641",
-  4: "#39D353"
-};
-
 const WIDTH = 53;
 const HEIGHT = 7;
 
-const CELL = 18;
+const CELL = 15;
 const GAP = 5;
-const RADIUS = 4;
 
-const PADDING_X = 20;
-const PADDING_Y = 25;
+const PADDING_X = 10;
+const PADDING_Y = 30;
 
 const STEP_X = CELL + GAP;
 const STEP_Y = CELL + GAP;
 
 const SVG_WIDTH =
-  PADDING_X * 2 + WIDTH * CELL + (WIDTH - 1) * GAP;
+  PADDING_X * 2 +
+  WIDTH * CELL +
+  (WIDTH - 1) * GAP;
 
 const SVG_HEIGHT =
-  PADDING_Y * 2 + HEIGHT * CELL + (HEIGHT - 1) * GAP;
+  PADDING_Y * 2 +
+  HEIGHT * CELL +
+  (HEIGHT - 1) * GAP;
 
-const DURATION = 55;
-const SNAKE_LENGTH = 7;
+const COLORS = [
+  "#161B22",
+  "#0E4429",
+  "#006D32",
+  "#26A641",
+  "#39D353"
+];
 
-async function getContributions() {
-  const query = `
-    query($login: String!) {
-      user(login: $login) {
-        contributionsCollection {
-          contributionCalendar {
-            weeks {
-              contributionDays {
-                contributionCount
-                contributionLevel
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
+const GREEN_PROBABILITY = 0.90;
 
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "User-Agent": "Samarth007-star-contribution-snake"
-    },
-    body: JSON.stringify({
-      query,
-      variables: {
-        login: username
-      }
-    })
-  });
+const ANIMATION_DURATION = 45;
 
-  if (!response.ok) {
-    throw new Error(`GitHub API error: ${response.status}`);
-  }
+const SNAKE_COLOR = "#39D353";
 
-  const data = await response.json();
-
-  if (data.errors) {
-    throw new Error(JSON.stringify(data.errors));
-  }
-
-  return data.data.user.contributionsCollection.contributionCalendar.weeks;
+function random(seed) {
+  let x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
 }
 
-function levelFromContribution(level) {
-  switch (level) {
-    case "NONE":
-      return 0;
-    case "FIRST_QUARTILE":
-      return 1;
-    case "SECOND_QUARTILE":
-      return 2;
-    case "THIRD_QUARTILE":
-      return 3;
-    case "FOURTH_QUARTILE":
-      return 4;
-    default:
-      return 0;
-  }
-}
+function generateGrid() {
+  const grid = [];
 
-function escapeXml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
+  let seed = 20260913;
 
-function createGrid(weeks) {
-  const cells = [];
-
-  for (let x = 0; x < Math.min(weeks.length, WIDTH); x++) {
-    const days = weeks[x].contributionDays;
+  for (let x = 0; x < WIDTH; x++) {
+    const column = [];
 
     for (let y = 0; y < HEIGHT; y++) {
-      const day = days[y];
+      const r = random(seed++);
 
-      if (!day) {
-        cells.push({
-          x,
-          y,
-          level: 0
-        });
+      if (r > GREEN_PROBABILITY) {
+        column.push(0);
         continue;
       }
 
-      cells.push({
-        x,
-        y,
-        level: levelFromContribution(day.contributionLevel)
-      });
+      const intensity = random(seed++);
+
+      let level;
+
+      if (intensity < 0.20) {
+        level = 1;
+      } else if (intensity < 0.45) {
+        level = 2;
+      } else if (intensity < 0.75) {
+        level = 3;
+      } else {
+        level = 4;
+      }
+
+      column.push(level);
     }
+
+    grid.push(column);
   }
 
-  return cells;
+  return grid;
 }
 
 function point(x, y) {
@@ -142,140 +88,179 @@ function point(x, y) {
   };
 }
 
-function createSnakePath() {
-  const points = [];
+function generateSnakePath(grid) {
+  const path = [];
 
   for (let x = 0; x < WIDTH; x++) {
     if (x % 2 === 0) {
       for (let y = 0; y < HEIGHT; y++) {
-        points.push(point(x, y));
+        path.push({
+          x,
+          y
+        });
       }
     } else {
       for (let y = HEIGHT - 1; y >= 0; y--) {
-        points.push(point(x, y));
+        path.push({
+          x,
+          y
+        });
       }
     }
   }
 
-  return points;
+  return path;
 }
 
-function createPath(points) {
+function pathToSvg(points) {
   return points
-    .map((p, index) =>
-      `${index === 0 ? "M" : "L"} ${p.x} ${p.y}`
-    )
+    .map((p, i) => {
+      const pos = point(p.x, p.y);
+
+      return `${i === 0 ? "M" : "L"} ${pos.x} ${pos.y}`;
+    })
     .join(" ");
 }
 
-function generateSvg(cells, points) {
-  const snakePath = createPath(points);
+function createGridSvg(grid, snakePath) {
+  let output = "";
 
-  const stepTime = DURATION / (points.length - 1);
+  const pathLength = snakePath.length;
 
-  let gridSvg = "";
+  const cellIndex = new Map();
 
-  for (const cell of cells) {
-    const x =
-      PADDING_X +
-      cell.x * STEP_X;
+  snakePath.forEach((cell, index) => {
+    cellIndex.set(`${cell.x}-${cell.y}`, index);
+  });
 
-    const y =
-      PADDING_Y +
-      cell.y * STEP_Y;
+  for (let x = 0; x < WIDTH; x++) {
+    for (let y = 0; y < HEIGHT; y++) {
 
-    const color = COLORS[cell.level];
+      const level = grid[x][y];
 
-    const shouldEat =
-      cell.level === 3 ||
-      cell.level === 4;
+      const px =
+        PADDING_X +
+        x * STEP_X;
 
-    const snakeIndex = points.findIndex(
-      p => Math.abs(p.x - (x + CELL / 2)) < 0.1 &&
-           Math.abs(p.y - (y + CELL / 2)) < 0.1
-    );
+      const py =
+        PADDING_Y +
+        y * STEP_Y;
 
-    if (shouldEat && snakeIndex >= 0) {
-      const eatTime =
-        (snakeIndex * stepTime) / DURATION;
+      const color = COLORS[level];
 
-      const disappearTime =
-        Math.min(eatTime + 0.008, 0.999);
+      const index =
+        cellIndex.get(`${x}-${y}`);
 
-      gridSvg += `
-        <rect
-          x="${x}"
-          y="${y}"
-          width="${CELL}"
-          height="${CELL}"
-          rx="${RADIUS}"
-          fill="${color}"
-        >
-          <animate
-            attributeName="opacity"
-            values="1;1;0;0"
-            keyTimes="0;${eatTime.toFixed(6)};${disappearTime.toFixed(6)};1"
-            dur="${DURATION}s"
-            repeatCount="indefinite"
+      const start =
+        index / pathLength;
+
+      const end =
+        Math.min(start + 0.025, 1);
+
+      if (level === 0) {
+
+        output += `
+          <rect
+            x="${px}"
+            y="${py}"
+            width="${CELL}"
+            height="${CELL}"
+            rx="3"
+            fill="${color}"
           />
-        </rect>
-      `;
-    } else {
-      gridSvg += `
-        <rect
-          x="${x}"
-          y="${y}"
-          width="${CELL}"
-          height="${CELL}"
-          rx="${RADIUS}"
-          fill="${color}"
-        />
-      `;
+        `;
+
+      } else {
+
+        output += `
+          <rect
+            x="${px}"
+            y="${py}"
+            width="${CELL}"
+            height="${CELL}"
+            rx="3"
+            fill="${color}"
+          >
+            <animate
+              attributeName="opacity"
+              values="1;1;0;0;1"
+              keyTimes="${start.toFixed(5)};${start.toFixed(5)};${end.toFixed(5)};0.999;1"
+              dur="${ANIMATION_DURATION}s"
+              repeatCount="indefinite"
+            />
+          </rect>
+        `;
+
+      }
     }
   }
 
-  let snakeSvg = "";
+  return output;
+}
 
-  for (let i = SNAKE_LENGTH - 1; i >= 0; i--) {
+function createSnakeSvg(snakePath) {
+
+  const svgPath =
+    pathToSvg(snakePath);
+
+  let output = "";
+
+  const snakeLength = 9;
+
+  for (let i = snakeLength - 1; i >= 0; i--) {
+
     const delay =
-      -(i * 0.22);
+      -(i * 0.18);
 
     const radius =
-      i === 0 ? 6.5 : 5.2;
+      i === 0
+        ? 6
+        : 4.5;
 
     const opacity =
-      i === 0 ? 1 : Math.max(0.25, 1 - i * 0.11);
+      Math.max(
+        0.25,
+        1 - i * 0.09
+      );
 
-    snakeSvg += `
+    output += `
       <circle
         r="${radius}"
-        fill="#39D353"
+        fill="${SNAKE_COLOR}"
         opacity="${opacity}"
       >
         <animateMotion
-          dur="${DURATION}s"
+          dur="${ANIMATION_DURATION}s"
           begin="${delay}s"
           repeatCount="indefinite"
           rotate="auto"
-          path="${snakePath}"
+          path="${svgPath}"
         />
       </circle>
     `;
   }
 
-  const head = `
-    <circle
-      r="7"
-      fill="#39D353"
-    >
-      <animateMotion
-        dur="${DURATION}s"
-        repeatCount="indefinite"
-        rotate="auto"
-        path="${snakePath}"
-      />
-    </circle>
-  `;
+  return output;
+}
+
+function generateSvg() {
+
+  const grid =
+    generateGrid();
+
+  const snakePath =
+    generateSnakePath(grid);
+
+  const gridSvg =
+    createGridSvg(
+      grid,
+      snakePath
+    );
+
+  const snakeSvg =
+    createSnakeSvg(
+      snakePath
+    );
 
   return `
 <svg
@@ -284,13 +269,13 @@ function generateSvg(cells, points) {
   height="${SVG_HEIGHT}"
   viewBox="0 0 ${SVG_WIDTH} ${SVG_HEIGHT}"
   role="img"
-  aria-label="GitHub contribution journey"
+  aria-label="Contribution Journey"
 >
+
   <rect
     width="100%"
     height="100%"
     fill="#0D1117"
-    rx="10"
   />
 
   <g>
@@ -299,44 +284,45 @@ function generateSvg(cells, points) {
 
   <g>
     ${snakeSvg}
-    ${head}
   </g>
+
 </svg>
 `;
 }
 
-async function main() {
-  if (!username) {
-    throw new Error("GITHUB_USERNAME is missing");
-  }
+function main() {
 
-  if (!token) {
-    throw new Error("GITHUB_TOKEN is missing");
-  }
+  const dist =
+    path.join(
+      process.cwd(),
+      "dist"
+    );
 
-  console.log(`Generating contribution journey for ${username}`);
+  fs.mkdirSync(
+    dist,
+    {
+      recursive: true
+    }
+  );
 
-  const weeks = await getContributions();
-
-  const cells = createGrid(weeks);
-
-  const points = createSnakePath();
-
-  const svg = generateSvg(cells, points);
-
-  fs.mkdirSync(path.join(process.cwd(), "dist"), {
-    recursive: true
-  });
+  const svg =
+    generateSvg();
 
   fs.writeFileSync(
-    path.join(process.cwd(), "dist", "github-contribution-grid-snake-dark.svg"),
+    path.join(
+      dist,
+      "github-contribution-grid-snake-dark.svg"
+    ),
     svg
   );
 
-  console.log("Contribution journey generated successfully.");
+  console.log(
+    "Contribution Journey generated."
+  );
+
+  console.log(
+    "Green coverage: approximately 90%"
+  );
 }
 
-main().catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+main();
