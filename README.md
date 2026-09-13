@@ -1,12 +1,4 @@
-## Hi there 👋
 
-<!--
-**Samarth007-star/Samarth007-star** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-Yes — this reference is much closer to the style you actually want: a personal-brand README with a strong identity, animated hero, structured profile, project cards, achievements, research, roadmap, analytics, mindset, and a strong footer.
-
-I’ve rebuilt that style specifically for Samarth Chavan, using the information from your CV rather than copying Piyush’s content. Your CV supports Java, Python, C/C++, React.js, Spring Boot, MySQL/PostgreSQL, DSA, four projects, ML research, certifications, competition achievements, and campus leadership.
-
-Below is the complete README.md. There are no Markdown code fences around it. Copy it directly into GitHub.
 
 <div align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050816,45:0B1F33,75:123C55,100:00D9FF&height=260&section=header&text=SAMARTH%20CHAVAN&fontSize=52&fontColor=FFFFFF&fontAlignY=35&desc=CODE%20%C3%97%20ENGINEERING%20%C3%97%20RESEARCH&descSize=16&descAlignY=57&descColor=67E8F9&animation=fadeIn" width="100%" alt="Samarth Chavan"/> <br> <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=19&duration=2600&pause=700&color=00F5FF&center=true&vCenter=true&width=850&lines=Software+Developer+%F0%9F%92%BB;Full-Stack+Application+Builder+%F0%9F%9A%80;Java+%7C+React.js+%7C+Spring+Boot+%7C+MySQL;Exploring+Machine+Learning+%26+Research+%F0%9F%A7%A0;Turning+Ideas+into+Practical+Software+%E2%9A%A1;Learning+%E2%86%92+Building+%E2%86%92+Improving+%E2%86%92+Repeating" alt="Typing animation"/>
 
@@ -476,14 +468,3 @@ while(alive) { learn(); build(); improve(); }
 <br><br>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,50:2563EB,100:7F00FF&height=150&section=footer&animation=fadeIn" width="100%" alt="Footer"/> </div>
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
