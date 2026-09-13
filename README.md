@@ -543,61 +543,127 @@ Team Leadership
 
 <div align="center">
 
-                         ┌──────────────────────┐
-                         │        JAVA          │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │     SPRING BOOT      │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │      REACT.JS        │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │    SQL & DATABASES   │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │  FULL-STACK SYSTEMS  │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │    AI & RESEARCH     │
-                         └──────────────────────┘
+<table>
+<tr>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=java" width="55"/><br>
+<b>JAVA</b>
+</td>
+
+<td align="center">➜</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=spring" width="55"/><br>
+<b>SPRING BOOT</b>
+</td>
+
+<td align="center">➜</td>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=react" width="55"/><br>
+<b>REACT.JS</b>
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="5" align="center">
+⬇️
+</td>
+
+</tr>
+
+<tr>
+
+<td align="center">
+<img src="https://skillicons.dev/icons?i=mysql" width="55"/><br>
+<b>SQL & DATABASES</b>
+</td>
+
+<td align="center">➜</td>
+
+<td align="center">
+🧩<br>
+<b>FULL-STACK<br>SYSTEMS</b>
+</td>
+
+<td align="center">➜</td>
+
+<td align="center">
+🧠<br>
+<b>AI & RESEARCH</b>
+</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=15&duration=2500&pause=700&color=00D9FF&center=true&vCenter=true&width=700&lines=Building+Full-Stack+Applications+%E2%86%92;Strengthening+Java+%26+Spring+Boot+%E2%86%92;Improving+DSA+%26+Problem+Solving+%E2%86%92;Exploring+Machine+Learning+%26+Research" alt="Current focus animation"/>
 
 </div>
 
 ---
 
-# 📈 GITHUB
+---
+
+
+# 📈 GITHUB ACTIVITY
 
 <div align="center">
 
 <a href="https://github.com/Samarth007-star">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Samarth007-star&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&include_all_commits=true&cache_seconds=86400" width="70%" alt="GitHub Statistics"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Samarth007-star&theme=tokyonight&hide_border=true&background=0D1117&stroke=30363D&ring=00D9FF&fire=00D9FF&currStreakLabel=00D9FF" width="70%" alt="GitHub Streak"/>
 
 </a>
 
 <br><br>
 
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Samarth007-star&bg_color=0D1117&color=00D9FF&line=00D9FF&point=FFFFFF&area=true&hide_border=true" width="95%" alt="GitHub Activity Graph"/>
+
+<br><br>
+
+<table>
+<tr>
+
+<td align="center">
+
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Samarth007-star&theme=tokyonight" width="100%" alt="Languages"/>
+
+</td>
+
+<td align="center">
+
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Samarth007-star&theme=tokyonight" width="100%" alt="Most Used Languages"/>
+
+</td>
+
+</tr>
+</table>
+
+<br>
+
 <a href="https://github.com/Samarth007-star">
 
-<img src="https://streak-stats.demolab.com?user=Samarth007-star&theme=tokyonight&hide_border=true" width="70%" alt="GitHub Streak"/>
+<img src="https://img.shields.io/github/followers/Samarth007-star?style=for-the-badge&logo=github&label=FOLLOWERS&color=00D9FF" alt="GitHub followers"/>
+
+</a>
+
+&nbsp;
+
+<a href="https://github.com/Samarth007-star?tab=repositories">
+
+<img src="https://img.shields.io/badge/REPOSITORIES-VIEW%20ALL-2563EB?style=for-the-badge&logo=github&logoColor=white" alt="Repositories"/>
 
 </a>
 
 </div>
 
----
-
+-
 # 🐍 CONTRIBUTION JOURNEY
 
 <div align="center">
