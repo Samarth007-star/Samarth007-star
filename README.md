@@ -1,6 +1,8 @@
 
 
-<div align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050816,45:0B1F33,75:123C55,100:00D9FF&height=260&section=header&text=SAMARTH%20CHAVAN&fontSize=52&fontColor=FFFFFF&fontAlignY=35&desc=CODE%20%C3%97%20ENGINEERING%20%C3%97%20RESEARCH&descSize=16&descAlignY=57&descColor=67E8F9&animation=fadeIn" width="100%" alt="Samarth Chavan"/> <br> <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=19&duration=2600&pause=700&color=00F5FF&center=true&vCenter=true&width=850&lines=Software+Developer+%F0%9F%92%BB;Full-Stack+Application+Builder+%F0%9F%9A%80;Java+%7C+React.js+%7C+Spring+Boot+%7C+MySQL;Exploring+Machine+Learning+%26+Research+%F0%9F%A7%A0;Turning+Ideas+into+Practical+Software+%E2%9A%A1;Learning+%E2%86%92+Building+%E2%86%92+Improving+%E2%86%92+Repeating" alt="Typing animation"/>
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050816,45:0B1F33,75:123C55,100:00D9FF&height=260&section=header&text=SAMARTH%20CHAVAN&fontSize=52&fontColor=FFFFFF&fontAlignY=35&desc=CODE%20%C3%97%20DEVELOPER%20%C3%97%20RESEARCH&descSize=16&descAlignY=57&descColor=67E8F9&animation=fadeIn" width="100%" alt="Samarth Chavan"/>
+</div>
 
 <br><br>
 
