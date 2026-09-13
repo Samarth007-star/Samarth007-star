@@ -386,13 +386,17 @@ Team Leadership
 <h2>🐍 CONTRIBUTION JOURNEY</h2>
 
 <div align="center">
-  <img
-    src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/github-contribution-grid-snake-dark.svg"
-    width="100%"
-    alt="Contribution Journey"
-  />
-  <br>
-  <sub>Every contribution is a step forward.</sub>
+
+<img
+  src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/github-contribution-grid-snake-dark.svg"
+  width="100%"
+  alt="Contribution Journey"
+/>
+
+<br>
+
+<sub>Every contribution is a step forward.</sub>
+
 </div>
 🧠 DEVELOPER MINDSET
 <div align="center"> <table> <tr> <td align="center" width="25%">
