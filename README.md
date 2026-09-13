@@ -383,8 +383,13 @@ Team Leadership
 <br><br>
 
 <a href="https://github.com/Samarth007-star"> <img src="https://streak-stats.demolab.com?user=Samarth007-star&theme=tokyonight&hide_border=true" width="70%" alt="GitHub Streak"/> </a> </div>
-🐍 CONTRIBUTION JOURNEY
-<div align="center"> <img src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/github-contribution-grid-snake-dark.svg" width="100%" alt="GitHub contribution snake"/> </div>
+<h2>🐍 CONTRIBUTION JOURNEY</h2>
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/github-contribution-grid-snake.svg" width="100%" alt="GitHub Contribution Snake"/>
+<br>
+<sub>Every contribution is a step forward.</sub>
+</div>
 🧠 DEVELOPER MINDSET
 <div align="center"> <table> <tr> <td align="center" width="25%">
 
