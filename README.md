@@ -476,7 +476,7 @@ Learning → Building → Breaking → Fixing → Improving
 
 <br><br>
 
-while(alive) { learn(); build(); improve(); }
+
 
 <br><br>
 
