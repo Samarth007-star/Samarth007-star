@@ -386,7 +386,7 @@ Team Leadership
 <h2>🐍 CONTRIBUTION JOURNEY</h2>
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/contribution-snake.svg" width="100%" alt="Contribution Journey"/>
+<img src="https://raw.githubusercontent.com/Samarth007-star/Samarth007-star/output/github-contribution-grid-snake-dark.svg" width="100%" alt="GitHub Contribution Snake"/>
 <br>
 <sub>Every contribution is a step forward.</sub>
 </div>
