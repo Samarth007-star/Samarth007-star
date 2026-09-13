@@ -145,6 +145,9 @@ Pune, India
 
 # 🚀 FEATURED PROJECTS
 
+
+# 🚀 FEATURED PROJECTS
+
 <div align="center">
 
 Building systems, not just writing code.
@@ -276,8 +279,63 @@ PHP • PostgreSQL • HTML • CSS • JavaScript
 
 </tr>
 
+<tr>
+
+<td width="50%" valign="top">
+
+## 👁️ Samart Vision Object Detection
+
+### COMPUTER VISION × OBJECT DETECTION
+
+A computer vision project focused on detecting and identifying objects from visual input using an object detection pipeline.
+
+### 🔥 Key Focus
+
+👁️ Object Detection  
+🖼️ Image Processing  
+🎯 Object Identification  
+🤖 Computer Vision  
+📊 Detection Results
+
+### 🛠️ Project
+
+Computer Vision • Object Detection
+
+<br>
+
+<a href="https://github.com/Samarth007-star/Samart_Vision_Object_Detection-" target="_blank">
+<img src="https://img.shields.io/badge/VIEW%20PROJECT-00D9FF?style=for-the-badge&logo=github&logoColor=white" alt="Samart Vision Object Detection"/>
+</a>
+
+</td>
+
+<td width="50%" valign="top">
+
+## 🚀 More Projects Coming Soon
+
+### BUILDING × LEARNING × RESEARCH
+
+Continuously developing new applications, experimenting with technologies, and exploring AI-driven solutions.
+
+### 🔥 Current Direction
+
+☕ Java & Spring Boot  
+⚛️ React.js  
+🧠 Machine Learning  
+🔬 Research  
+🧩 Data Structures & Algorithms
+
+<br>
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=14&duration=2400&pause=700&color=00D9FF&center=true&vCenter=true&width=380&lines=Building+the+next+project...;Learning+something+new...;More+systems+coming+soon..." alt="More projects animation"/>
+
+</td>
+
+</tr>
+
 </table>
 
+---
 ---
 
 # 🔬 RESEARCH
