@@ -551,13 +551,12 @@ SNBP College, Pune
 
 🎪
 
-### Yashofest
+### Sport's Day
 
-**Co-Ordinator**
+**Head Co-Ordinator**
 
-Event Planning  
-Team Coordination
-
+Event Management  
+Team Leadership
 </td>
 
 <td align="center" width="33%">
@@ -577,12 +576,12 @@ Communication
 
 🏏
 
-### Sport's Day
+### Yashofest
 
-**Head Co-Ordinator**
+**Co-Ordinator**
 
-Event Management  
-Team Leadership
+Event Planning  
+Team Coordination
 
 </td>
 
