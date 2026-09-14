@@ -145,9 +145,6 @@ Pune, India
 
 # 🚀 FEATURED PROJECTS
 
-
-# 🚀 FEATURED PROJECTS
-
 <div align="center">
 
 Building systems, not just writing code.
