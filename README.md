@@ -874,6 +874,14 @@ Learning → Building → Breaking → Fixing → Improving
 
 <br><br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,50:2563EB,100:7F00FF&height=180&section=footer&text=Thank%20You%20for%20Visiting%20My%20Profile!&fontSize=26&fontColor=FFFFFF&fontAlignY=65&animation=fadeIn" width="100%" alt="Thank You for Visiting My Profile"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,45:2563EB,75:4F46E5,100:7F00FF&height=220&section=footer&text=THANK%20YOU%20FOR%20VISITING%20MY%20PROFILE&fontSize=25&fontColor=FFFFFF&fontAlignY=55&desc=KEEP%20LEARNING%20%E2%80%A2%20KEEP%20BUILDING%20%E2%80%A2%20KEEP%20EXPLORING%20%F0%9F%9A%80&descSize=13&descAlignY=72&descColor=E0F2FE&animation=fadeIn" width="100%" alt="Thank You for Visiting My Profile"/>
+
+<br>
+
+<div align="center">
+
+<sub>💻 Code • 🚀 Build • 🧠 Learn • 🔬 Research • 🌱 Grow</sub>
+
+</div>
 
 </div>
