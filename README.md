@@ -717,7 +717,7 @@ Team Coordination
 
 </div>
 
--
+
 # 🐍 CONTRIBUTION JOURNEY
 
 <div align="center">
