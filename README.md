@@ -874,6 +874,15 @@ Learning → Building → Breaking → Fixing → Improving
 
 <br><br>
 
+<h2>✨ Thank You for Visiting My Profile! ✨</h2>
+
+<p>
+  <b>Thanks for stopping by! 🚀</b><br>
+  Feel free to explore my projects, research, and repositories.
+</p>
+
+<br>
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,50:2563EB,100:7F00FF&height=150&section=footer&animation=fadeIn" width="100%" alt="Footer"/>
 
 </div>
